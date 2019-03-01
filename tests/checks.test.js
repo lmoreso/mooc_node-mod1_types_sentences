@@ -87,13 +87,13 @@ describe("mooc_node-mod1_types_sentences", function () {
                 this.msg_err = `Error running the file.\n\t\t\tReceived: ${error_exe}`;
                 error_critical = this.msg_err;
             } else {
-                output = output.split('', async function () { this.name = /\r?\n\r?\n/);
+                output = output.split(/\r?\n\r?\n/);
             }
             should.not.exist(error_exe);
         }
     });
 
-    it(`3: Checking the output length`;
+    it('', async function () { this.name = `3: Checking the output length`;
         this.score = 1.5;
         if (error_critical) {
             this.msg_err = error_critical;
@@ -150,7 +150,9 @@ describe("mooc_node-mod1_types_sentences", function () {
             this.error = false;
             this.lines = output[2].split(/\r?\n/);
             for (let d in this.lines) {
-                this.myreg = `.+?${d}.+?${(d >>> 0).toString(16)}.+?${(d >>> 0).toString(8)}.+?${(d >>> 0).toString(2)}.+?`;
+                //this.myreg = `.+?${d}.+?${(d >>> 0).toString(16)}.+?${(d >>> 0).toString(8)}.+?${(d >>> 0).toString(2)}.+?`;
+                let num = Number(d);
+                this.myreg = `${num} dec = ${num.toString(16)} hex = ${num.toString(8)} oct = ${num.toString(2)} bin`;
                 this.expected = new RegExp(this.myreg);
                 let ok = Utils.search(this.expected, this.lines[d]);
                 if (!ok) {
@@ -174,7 +176,8 @@ describe("mooc_node-mod1_types_sentences", function () {
             let i = 0;
             for (let d = 0; d <= 22; ++d) {
                 if (((d % 2) === 1) && ((d < 10) || (d > 20))) {
-                    this.myreg = `.+?${d}.+?${(d >>> 0).toString(16)}.+?${(d >>> 0).toString(8)}.+?${(d >>> 0).toString(2)}.+?`;
+                    //this.myreg = `.+?${d}.+?${(d >>> 0).toString(16)}.+?${(d >>> 0).toString(8)}.+?${(d >>> 0).toString(2)}.+?`;
+                    this.myreg = `${d} dec = ${d.toString(16)} hex = ${d.toString(8)} oct = ${d.toString(2)} bin`;
                     this.expected = new RegExp(this.myreg);
                     let ok = Utils.search(this.expected, this.lines[i]);
                     if (!ok) {
@@ -202,7 +205,7 @@ describe("mooc_node-mod1_types_sentences", function () {
     });
 
     it('', async function () { this.name = `9: Checking that the farewell sentence is printed`;
-        this.score = 1.5;
+        this.score = 1;
         if (error_critical) {
             this.msg_err = error_critical;
             should.not.exist(error_critical);
@@ -213,4 +216,6 @@ describe("mooc_node-mod1_types_sentences", function () {
             Utils.search(this.expected, output[5]).should.be.equal(true);
         }
     });
+    
+
 });

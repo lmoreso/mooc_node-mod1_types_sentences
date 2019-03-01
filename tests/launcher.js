@@ -36,5 +36,5 @@ new Mocha({
         }
     })
     .on('end', function (test) {
-        process.stdout.write(`Final Result: ${score}/${score_total}`);
+        process.stdout.write(`Final Result: ${score}/${score_total}\n\n`);
     });
